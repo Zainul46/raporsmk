@@ -1,0 +1,56 @@
+{% load rapor_tags %}
+{% load static %}
+{% load solo_tags %}
+{% get_solo 'sekolah.Sekolah' as sekolah %}
+{% semester_is_active as active_semester %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        {% include 'include/fonts.html' %}
+        {% include 'include/css.html' %}
+        
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/LogoSMK3.png' %}">
+        <title>E-Rapor SMK ZAINUL MU'IN</title>
+    </head>
+    <body>
+        {% include 'components/sidebar.html' %}
+        <div class="all-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="logo-pro">
+                            <a href="#"><img class="main-logo" src="{% static 'img/logo/logo.png' %}" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-advance-area">
+                {% include 'components/header.html' %}
+                {% include 'components/mobilemenu.html' %}
+            </div>
+            {% block content %}{% endblock content %}
+            <div class="footer-copyright-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="footer-copy-right">
+                                <p>
+                                Copyright © ZAINUL 2023. All rights reserved. 
+                                 
+                                Developed by <a href="https://github.com/harizMunawar/" target="_blank">Muhammad Zulfa Zainul Muhsin</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'include/js.html' %}
+        {% include 'components/notification.html' %}
+        {% block extrascript %}{% endblock extrascript %}
+    </body>
+</html>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load rapor_tags %}
+
+{% block content %}
+    {% include 'components/breadcrumb.html' with searchbar=True %}
+    <div class="container-fluid">
+        <div class="row mg-b-30">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst">
+                    <h4>Daftar Guru</h4>
+                    <div class="add-product">
+                        <a href="{% url 'buat-guru' %} " class="cursor-pointer">Buat Guru</a>
+                    </div>
+                    <div class="asset-inner table-condensed">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="vert-center text-center p-10" rowspan="2">NIP</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Nama</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Tempat/Tanggal Lahir</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Jenis Kelamin</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Alamat</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Agama</th>
+                                    <th class="vert-center text-center p-10" rowspan="2">Hapus</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for guru in list_guru %}
+                                    <tr>
+                                        <td onclick="location.href=`{% url 'detail-guru' guru.nip %}`" class="vert-center text-center text-primary cursor-pointer">{{guru.nip}}</td>
+                                        <td class="vert-center text-center">{{guru.nama}}</td>
+                                        <td class="vert-center text-center">{{guru.tempat_lahir}}/{{guru.tanggal_lahir|date:'d-m-Y'}}</td>
+                                        <td class="vert-center text-center">{{guru.get_gender_display}}</td>
+                                        <td class="vert-center text-center">{{guru.alamat}}</td>
+                                        <td class="vert-center text-center">{{guru.agama}}</td>
+                                        
+                                        {% url 'hapus-guru' guru.nip as hapus_guru %}
+                                        <td class="vert-center text-center" style="z-index: 99;">
+                                            <button onclick="confirmationAlert('Yakin ingin menghapus {{guru.nama}} dari basis data?', '{{hapus_guru}}')" class="btn btn-danger widget-btn-4 btn-md">
+                                                <span class="fa fa-trash">
+
+                                                </span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% include 'components/pagination.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
